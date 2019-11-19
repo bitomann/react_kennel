@@ -5,9 +5,8 @@ class LocationCard extends Component {
     return (
       <div className="card">
         <div className="card-content">
-          <h3>City: <span className="card-city">Oakland</span></h3>
-          <h3>State: <span className="card-state">CA</span></h3>
-          <p>Position: Oakland-Alameda County Coliseum</p>
+          <h3>City: <span className="card-locationname">{this.props.location.name}</span></h3>
+          <p>Adress: {this.props.location.address}</p>
         </div>
       </div>
     );
