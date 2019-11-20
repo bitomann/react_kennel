@@ -18,13 +18,27 @@ import LocationManager from '../../modules/LocationManager'
         })
     }
 
+    deleteLocation = id => {
+      LocationManager.delete(id)
+      .then(() => {
+        LocationManager.getAll()
+        .then((newLocations) => {
+          this.setState({
+              loctions: newLocations
+          })
+        })
+      })
+    }
+
     render(){
         console.log("locationList: Render");
-      
+        console.log(this.state.locations);
+
         return(
           <div className="container-cards">
             {this.state.locations.map(location =>
-              <LocationCard key={location.id} location={location} />
+              <LocationCard key={location.id} location={location}
+              deleteLocation={this.deleteLocation} />
             )}
           </div>
         )

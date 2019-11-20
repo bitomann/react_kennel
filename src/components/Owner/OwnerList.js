@@ -19,13 +19,27 @@ import OwnerManager from '../../modules/OwnerManager'
         })
     }
 
+    deleteOwner = id => {
+      OwnerManager.delete(id)
+      .then(() => {
+        OwnerManager.getAll()
+        .then((newOwners) => {
+          this.setState({
+              owners: newOwners
+          })
+        })
+      })
+    }
+
     render(){
         console.log("ownerList: Render");
+        console.log(this.state.owns);
       
         return(
           <div className="container-cards">
             {this.state.owners.map(owner =>
-              <OwnerCard key={owner.id} owner={owner} />
+              <OwnerCard key={owner.id} owner={owner}
+              deleteOwner={this.deleteOwner} />
             )}
           </div>
         )
