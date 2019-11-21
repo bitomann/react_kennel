@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
     //import the components we will need
 import AnimalCard from './AnimalCard'
-import AnimalManager from '../../modules/AnimalManager'
+import APIManager from '../../modules/APIManager'
 
     class AnimalList extends Component {
         //define what this component needs to render
@@ -12,7 +12,7 @@ import AnimalManager from '../../modules/AnimalManager'
     componentDidMount(){
         console.log("ANIMAL LIST: ComponentDidMount");
         //getAll from AnimalManager and hang on to that data; put it in state
-        AnimalManager.getAll()
+        APIManager.getAll("animals")
         .then((animalsArray) => {
             this.setState({
                 animals: animalsArray
@@ -21,9 +21,9 @@ import AnimalManager from '../../modules/AnimalManager'
     }
 
     deleteAnimal = id => {
-      AnimalManager.delete(id)
+      APIManager.delete(id)
       .then(() => {
-        AnimalManager.getAll()
+        APIManager.getAll()
         .then((newAnimals) => {
           this.setState({
               animals: newAnimals
@@ -37,6 +37,13 @@ import AnimalManager from '../../modules/AnimalManager'
       console.log(this.state.animals);
     
       return(
+        <React.Fragment>
+        <section className="section-content">
+            <button type="button" className="btn"
+      onClick={() => {this.props.history.push("/animals/new")}}>
+      Admit Animal
+  </button>
+</section>
         <div className="container-cards">
           {this.state.animals.map(animal =>
             <AnimalCard
@@ -46,6 +53,7 @@ import AnimalManager from '../../modules/AnimalManager'
             />
           )}
         </div>
+        </React.Fragment>
       )
     }
 }

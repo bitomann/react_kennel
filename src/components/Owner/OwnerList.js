@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import OwnerCard from './OwnerCard'
-import OwnerManager from '../../modules/OwnerManager'
+import APIManager from '../../modules/APIManager'
 
     class OwnerList extends Component {
         state = {
@@ -10,7 +10,7 @@ import OwnerManager from '../../modules/OwnerManager'
 
     componentDidMount(){
         console.log("OWNER LIST: ComponentDidMount");
-        OwnerManager.getAll()
+        APIManager.getAll()
         .then((ownersArray) => {
           console.log(ownersArray)
             this.setState({
@@ -20,9 +20,9 @@ import OwnerManager from '../../modules/OwnerManager'
     }
 
     deleteOwner = id => {
-      OwnerManager.delete(id)
+      APIManager.delete(id)
       .then(() => {
-        OwnerManager.getAll()
+        APIManager.getAll()
         .then((newOwners) => {
           this.setState({
               owners: newOwners

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 //import the components we will need
 import EmployeeCard from './EmployeeCard'
-import EmployeeManager from '../../modules/EmployeeManager'
+import APIManager from '../../modules/APIManager'
 
     class EmployeeList extends Component {
         state = {
@@ -10,7 +10,7 @@ import EmployeeManager from '../../modules/EmployeeManager'
 
     componentDidMount(){
         console.log("EMPLOYEE LIST: ComponentDidMount");
-        EmployeeManager.getAll()
+        APIManager.getAll()
         .then((employeesArray) => {
             this.setState({
               employees: employeesArray
@@ -19,9 +19,9 @@ import EmployeeManager from '../../modules/EmployeeManager'
     }
 
     deleteEmployee = id => {
-      EmployeeManager.delete(id)
+      APIManager.delete(id)
       .then(() => {
-        EmployeeManager.getAll()
+        APIManager.getAll()
         .then((newEmployees) => {
           this.setState({
               employees: newEmployees

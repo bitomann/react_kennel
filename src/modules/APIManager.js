@@ -1,24 +1,26 @@
-const remoteURL = 'http://localhost:5002';
+const remoteURL = "http://localhost:5002"
 
 export default {
-	get(id, endpoint) {
-		return fetch(`${remoteURL}/${endpoint}/${id}`).then((result) => result.json());
-	},
-	getAll(endpoint) {
-		return fetch(`${remoteURL}/${endpoint}`).then((result) => result.json());
-	},
-	delete(id, endpoint) {
-		return fetch(`http://localhost:5002/${endpoint}/${id}`, {
-			method: 'DELETE'
-		}).then((result) => result.json());
-    },
-    post(newObject, endpoint) {
-        return fetch(`${remoteURL}/${endpoint}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newObject)
-        }).then(data => data.json())
-    }
-};
+  get(mode, id) {
+    return fetch(`${remoteURL}/${mode}/${id}`).then(result => result.json())
+  },
+  getAll(mode) {
+      console.log("what endpoint", mode)
+    return fetch(`${remoteURL}/${mode}`).then(result => result.json())
+  },
+  delete(mode, id) {
+    return fetch(`http://localhost:5002/${mode}/${id}`, {
+        method: "DELETE"
+    })
+    .then(result => result.json())
+  },
+  post(mode, newAnimal) {
+    return fetch(`${remoteURL}/${mode}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newAnimal)
+    }).then(data => data.json())
+}
+}
