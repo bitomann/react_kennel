@@ -11,7 +11,7 @@ class AnimalDetail extends Component {
     }
 
     handleDelete = () => {
-        //invoke the delete function in AnimalManger and re-direct to the animal list.
+        //invoke the delete function in APIManger and re-direct to the animal list.
         this.setState({loadingStatus: true})
         APIManager.delete("animals", this.props.animalId)
         .then(() => this.props.history.push("/animals"))
@@ -19,7 +19,7 @@ class AnimalDetail extends Component {
 
     componentDidMount(){
         console.log("AnimalDetail: ComponentDidMount");
-        //get(id) from AnimalManager and hang on to that data; put it into state
+        //get(id) from APIManager and hang on to that data; put it into state
         APIManager.get("animals", this.props.animalId)
         .then((animal) => {
             this.setState({

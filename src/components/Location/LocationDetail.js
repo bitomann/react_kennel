@@ -8,11 +8,11 @@ class LocationDetail extends Component {
 
     state = {
         name: "",
-        breed: "",
+        address: "",
         loadingStatus: true,
     }
     handleDelete = () => {
-        // invokes delete function in APIManager and re-directsto Location List//
+        // invokes delete function in APIManager and re-directs to Location List//
         this.setState({loadingStatus: true})
         APIManager.delete("locations", this.props.locationID)
         .then(() => this.props.history.push("/locations"))

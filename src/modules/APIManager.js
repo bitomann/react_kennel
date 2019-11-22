@@ -14,13 +14,13 @@ export default {
     })
     .then(result => result.json())
   },
-  post(mode, newAnimal) {
+  post(mode, newPost) {
     return fetch(`${remoteURL}/${mode}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(newAnimal)
+        body: JSON.stringify(newPost)
     }).then(data => data.json())
 }
 }

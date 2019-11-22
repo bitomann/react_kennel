@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-    //import the components we will need
 import AnimalCard from './AnimalCard'
 import APIManager from '../../modules/APIManager'
 
@@ -37,7 +36,7 @@ import APIManager from '../../modules/APIManager'
       console.log(this.state.animals);
     
       return(
-        <React.Fragment>
+        <>
         <section className="section-content">
             <button type="button" className="btn"
       onClick={() => {this.props.history.push("/animals/new")}}>
@@ -50,10 +49,11 @@ import APIManager from '../../modules/APIManager'
               key={animal.id}
               animal={animal}
               deleteAnimal={this.deleteAnimal}
+              {...this.props}
             />
           )}
         </div>
-        </React.Fragment>
+        </>
       )
     }
 }
