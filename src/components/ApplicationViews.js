@@ -1,4 +1,4 @@
-import { Route, Redirect } from 'react-router-dom'
+import { Route, withRouter, Redirect } from "react-router-dom"
 import React, { Component } from 'react'
 import Home from './home/Home'
 // import AnimalCard from './animal/AnimalCard'
@@ -16,8 +16,6 @@ import Login from './auth/Login'
 import AnimalEditForm from './animal/AnimalEditForm'
 import LocationForm from './Location/LocationForm'
 import LocationEditForm from './Location/LocationEditForm'
-
-
 class ApplicationViews extends Component {
 
   // Check if credentials are in local storage
@@ -42,7 +40,7 @@ class ApplicationViews extends Component {
     if (this.isAuthenticated()) {
         return <AnimalList {...props} />
     } else {
-        return <Redirect to="/login" />
+        // <Route path="/login" component={Login} />
     }
 }} />
 <Route exact path="/animals/:animalId(\d+)" render={(props) => {
@@ -79,9 +77,9 @@ class ApplicationViews extends Component {
   return <LocationDetail locationId={parseInt(props.match.params.locationId)}
   {...props}/>
 }} />
-        <Route path="/employee" render={(props) => {
-          return <EmployeeList />
-        }} />
+        <Route path="/employees/:employeeId(\d+)/details" render={(props) => {
+    return <EmployeeWithAnimals {...props} />
+}} />
         <Route path="/owner" render={(props) => {
           return <OwnerList />
         }} />
