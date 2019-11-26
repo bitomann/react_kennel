@@ -10,7 +10,7 @@ import APIManager from '../../modules/APIManager'
 
     componentDidMount(){
         console.log("EMPLOYEE LIST: ComponentDidMount");
-        APIManager.getAll()
+        APIManager.getAll("employees")
         .then((employeesArray) => {
             this.setState({
               employees: employeesArray
@@ -21,7 +21,7 @@ import APIManager from '../../modules/APIManager'
     deleteEmployee = id => {
       APIManager.delete(id)
       .then(() => {
-        APIManager.getAll()
+        APIManager.getAll("employees")
         .then((newEmployees) => {
           this.setState({
               employees: newEmployees
@@ -33,16 +33,28 @@ import APIManager from '../../modules/APIManager'
     render(){
         console.log("employeeList: Render");
         console.log(this.state.employees);
-      
-        return(
-          <div className="container-cards">
-            {this.state.employees.map(employee =>
-              <EmployeeCard key={employee.id} employee={employee}
-              deleteEmployee={this.deleteEmployee} />
-            )}
-          </div>
-        )
-      }
+      return(
+        <>
+        <section className="section-content">
+          <button type="button"
+            className="btn"
+            onClick={() => { this.props.history.push("/employees/new") }}>
+            Add Employee
+          </button>
+        </section>
+        <div className="container-cards">
+          {this.state.employees.map(animal =>
+            <EmployeeCard
+              key={animal.id}
+              employee={animal}
+              deleteEmployee={this.deleteEmployee}
+              {...this.props}
+            />
+          )}
+        </div>
+      </>
+    )
+  }
 }
 
 export default EmployeeList
