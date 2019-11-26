@@ -17,19 +17,11 @@ class Login extends Component {
 
   handleLogin = (e) => {
     e.preventDefault()
-    /*
-        For now, just store the email and password that
-        the customer enters into local storage.
-    */
-    localStorage.setItem(
-        "credentials",
-        JSON.stringify({
-            email: this.state.email,
-            password: this.state.password
-        })
-    )
+    this.props.setUser({
+      email: this.state.email,
+      password: this.state.password
+    })
     this.props.history.push("/animals");
-
   }
 
   render() {
@@ -40,9 +32,9 @@ class Login extends Component {
             <div className="formgrid">
                 <input onChange={this.handleFieldChange} type="email"
                     id="email"
-                    placeholder="Email address"
+                    placeholder="Email Address"
                     required="" autoFocus="" />
-                <label htmlFor="inputEmail">Email address</label>
+                <label htmlFor="inputEmail">Email Address</label>
 
                 <input onChange={this.handleFieldChange} type="password"
                     id="password"

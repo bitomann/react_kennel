@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 class EmployeeCard extends Component {
   render() {
@@ -9,12 +10,15 @@ class EmployeeCard extends Component {
             <img src={require('./raiders.jpg')} alt="Raiders Logo" />
           </picture>
           <h2>Name: <span className="card-employeename">{this.props.employee.name}</span></h2>
-            <p>Position: {this.props.employee.position}</p>
-            <button type="button" onClick={() => this.props.deleteEmployee(this.props.employee.id)}>Terminate</button>
+          <button type="button"
+            onClick={() => { this.props.history.push(`/employees/${this.props.employee.id}/edit`) }}>Edit</button>
+          <button type="button" onClick={() => this.props.deleteAnimal(this.props.employee.id)}>Delete</button>
+          <button type="button"
+            onClick={() => { this.props.history.push(`/employees/${this.props.employee.id}/details`) }}>Details</button>
         </div>
-      </div>
-    );
-  }
-}
-
-export default EmployeeCard;
+        </div>
+        );
+      }
+    }
+    
+    export default EmployeeCard;
